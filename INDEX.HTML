@@ -1,593 +1,576 @@
-</section>
-
-        <!-- Script Details Modal -->
-        <div id="script-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <div id="modal-body">
-                    <!-- Content will be dynamically loaded -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Additional Content Sections -->
-
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سكربتات FiveM مجاناً</title>
+    <title>نظام تسجيل الدخول الشامل</title>
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <!-- أيقونات Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
         }
-
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #f59e0b;
-            --dark: #1a1b2e;
-            --darker: #0f0f23;
-            --light: #ffffff;
-            --gray: #6b7280;
-            --gray-light: #f3f4f6;
-        }
-
+        
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
-            color: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-
+        
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: rgba(26, 27, 46, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-            position: fixed;
             width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        nav {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
+            flex-direction: column;
         }
-
-        .logo {
+        
+        .header {
+            background: linear-gradient(to right, #4f46e5, #7c3aed);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+        }
+        
+        .form-page {
+            min-width: 100%;
+            padding: 40px;
+        }
+        
+        .form-title {
+            text-align: center;
+            color: #4f46e5;
+            margin-bottom: 30px;
             font-size: 1.8rem;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4f46e5;
             font-weight: bold;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.1rem;
         }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
+        
+        .input-group input {
             width: 100%;
+            padding: 15px;
+            border: 2px solid #d1d5db;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: border-color 0.3s;
         }
-
-        /* Language Toggle */
-        .lang-toggle {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid var(--primary);
-            border-radius: 25px;
-            padding: 0.5rem 1rem;
+        
+        .input-group input:focus {
+            border-color: #4f46e5;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--light);
-            font-size: 0.9rem;
-        }
-
-        .lang-toggle:hover {
-            background: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-top: 80px;
-            padding: 4rem 0;
-            text-align: center;
-            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--light), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--gray);
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: var(--light);
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 0.4s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-        }
-
-        /* Scripts Grid */
-        .scripts-section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--light);
-        }
-
-        .scripts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .script-card {
-            background: rgba(26, 27, 46, 0.8);
-            border-radius: 15px;
-            padding: 0;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .script-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-
-        .script-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px 15px 0 0;
-        }
-
-        .script-content {
-            padding: 2rem;
-        }
-
-        .script-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: var(--primary);
-        }
-
-        .script-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .script-card p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .script-meta {
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: var(--gray);
+            justify-content: center;
+            gap: 10px;
         }
-
-        .download-btn {
-            background: linear-gradient(135deg, var(--secondary), #d97706);
-            color: var(--light);
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-google {
+            background: linear-gradient(to right, #dd4b39, #d14836);
+        }
+        
+        .btn-discord {
+            background: linear-gradient(to right, #5865F2, #4752c4);
+        }
+        
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-login-title {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .social-login-title::before,
+        .social-login-title::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: #d1d5db;
+        }
+        
+        .social-login-title::before {
+            left: 0;
+        }
+        
+        .social-login-title::after {
+            right: 0;
+        }
+        
+        .toggle-form {
+            text-align: center;
+            margin-top: 20px;
+            color: #4b5563;
+        }
+        
+        .toggle-form a {
+            color: #4f46e5;
             text-decoration: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
             font-weight: bold;
-            transition: all 0.3s ease;
-            display: inline-block;
+            cursor: pointer;
         }
-
-        .download-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        
+        .toggle-form a:hover {
+            text-decoration: underline;
         }
-
-        /* Footer */
-        footer {
-            background: var(--darker);
-            padding: 3rem 0 1rem;
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .footer-section p, .footer-section li {
-            color: var(--gray);
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section a {
-            color: var(--gray);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
+        
+        .error-message {
+            color: #ef4444;
             text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(99, 102, 241, 0.1);
-            color: var(--gray);
+            margin-top: 15px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 8px;
+            background: #fee2e2;
         }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        
+        .success-message {
+            color: #10b981;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 8px;
+            background: #d1fae5;
         }
-
-        /* Mobile Responsive */
+        
+        .user-dashboard {
+            display: none;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .user-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid #4f46e5;
+            background: #e0e7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #4f46e5;
+        }
+        
+        .user-info {
+            margin-bottom: 30px;
+        }
+        
+        .user-info h2 {
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+        
+        .user-info p {
+            color: #6b7280;
+        }
+        
+        .logout-btn {
+            background: #f87171;
+            color: white;
+        }
+        
+        .logout-btn:hover {
+            background: #ef4444;
+        }
+        
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .container {
+                max-width: 100%;
             }
             
-            .hero h1 {
-                font-size: 2.5rem;
+            .form-page {
+                padding: 30px 20px;
             }
             
-            .scripts-grid {
-                grid-template-columns: 1fr;
+            .header {
+                padding: 20px;
             }
-        }
-
-        /* Language Direction */
-        [dir="ltr"] {
-            text-align: left;
-        }
-        
-        [dir="ltr"] .hero {
-            text-align: center;
-        }
-        
-        [dir="ltr"] .section-title {
-            text-align: center;
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo" data-ar="سكربتات FiveM" data-en="FiveM Scripts">سكربتات FiveM</div>
-            <ul class="nav-links">
-                <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                <li><a href="#scripts" data-ar="السكربتات" data-en="Scripts">السكربتات</a></li>
-                <li><a href="#tutorials" data-ar="التعليمات" data-en="Tutorials">التعليمات</a></li>
-                <li><a href="#contact" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
-                <li><button class="lang-toggle" onclick="toggleLanguage()" data-ar="English" data-en="العربية">English</button></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section class="hero" id="home">
-            <div class="container">
-                <h1 data-ar="سكربتات FiveM مجانية" data-en="Free FiveM Scripts">سكربتات FiveM مجانية</h1>
-                <p data-ar="اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك" data-en="Discover a wide range of free and premium FiveM scripts to enhance your server">اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك</p>
-                <a href="#scripts" class="cta-button" data-ar="تصفح السكربتات" data-en="Browse Scripts">تصفح السكربتات</a>
-            </div>
-        </section>
-
-        <section class="scripts-section" id="scripts">
-            <div class="container">
-                <h2 class="section-title" data-ar="أحدث السكربتات" data-en="Latest Scripts">أحدث السكربتات</h2>
-                <div class="scripts-grid">
-                    <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=200&fit=crop&crop=center" alt="نظام الوظائف" class="script-image">
-                        <div class="script-content">
-                            <h3 data-ar="نظام الوظائف المتطور" data-en="Advanced Job System">نظام الوظائف المتطور</h3>
-                            <div class="script-meta">
-                                <span data-ar="الفئة: وظائف" data-en="Category: Jobs">الفئة: وظائف</span>
-                                <span data-ar="التحديث: اليوم" data-en="Updated: Today">التحديث: اليوم</span>
-                            </div>
-                            <p data-ar="نظام وظائف شامل يدعم أكثر من 15 وظيفة مختلفة مع نظام رواتب متقدم ومهام يومية. يتضمن وظائف الشرطة، الطبيب، سائق التاكسي، عامل البناء، والمزيد. كل وظيفة لها مهامها الخاصة ونظام ترقيات مميز مع إمكانية كسب المال والخبرة." data-en="Comprehensive job system supporting 15+ different jobs with advanced salary system and daily missions. Includes police, medic, taxi driver, construction worker, and more. Each job has unique tasks and promotion system with money and experience rewards.">نظام وظائف شامل يدعم أكثر من 15 وظيفة مختلفة مع نظام رواتب متقدم ومهام يومية. يتضمن وظائف الشرطة، الطبيب، سائق التاكسي، عامل البناء، والمزيد. كل وظيفة لها مهامها الخاصة ونظام ترقيات مميز مع إمكانية كسب المال والخبرة.</p>
-                            <a href="#job-system-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('job-system')">تحميل مجاني</a>
-                        </div>
-                    </div>
-
-                    <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop&crop=center" alt="سكربت البنك" class="script-image">
-                        <div class="script-content">
-                            <h3 data-ar="سكربت البنك الذكي" data-en="Smart Banking Script">سكربت البنك الذكي</h3>
-                            <div class="script-meta">
-                                <span data-ar="الفئة: اقتصاد" data-en="Category: Economy">الفئة: اقتصاد</span>
-                                <span data-ar="التحديث: أمس" data-en="Updated: Yesterday">التحديث: أمس</span>
-                            </div>
-                            <p data-ar="نظام مصرفي متكامل مع إمكانية الإيداع والسحب والتحويلات وبطاقات الائتمان الذكية. يدعم حسابات التوفير والجاري مع فوائد شهرية، وأجهزة صراف آلي منتشرة في جميع أنحاء المدينة. يتضمن نظام أمان متقدم ورسوم معاملات واقعية." data-en="Complete banking system with deposits, withdrawals, transfers, and smart credit cards. Supports savings and current accounts with monthly interest, ATMs throughout the city. Features advanced security system and realistic transaction fees.">نظام مصرفي متكامل مع إمكانية الإيداع والسحب والتحويلات وبطاقات الائتمان الذكية. يدعم حسابات التوفير والجاري مع فوائد شهرية، وأجهزة صراف آلي منتشرة في جميع أنحاء المدينة. يتضمن نظام أمان متقدم ورسوم معاملات واقعية.</p>
-                            <a href="#banking-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('banking')">تحميل مجاني</a>
-                        </div>
-                    </div>
-
-                    <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&h=200&fit=crop&crop=center" alt="محل السيارات" class="script-image">
-                        <div class="script-content">
-                            <h3 data-ar="سكربت محل السيارات" data-en="Car Dealership Script">سكربت محل السيارات</h3>
-                            <div class="script-meta">
-                                <span data-ar="الفئة: مركبات" data-en="Category: Vehicles">الفئة: مركبات</span>
-                                <span data-ar="التحديث: منذ 3 أيام" data-en="Updated: 3 days ago">التحديث: منذ 3 أيام</span>
-                            </div>
-                            <p data-ar="معرض سيارات تفاعلي مع إمكانية تجربة السيارات وأنظمة دفع متعددة وكتالوج شامل. يضم أكثر من 200 سيارة مختلفة من السيارات الاقتصادية إلى السيارات الفاخرة والرياضية. يتضمن نظام تمويل وقروض سيارات مع إمكانية الدفع بالتقسيط." data-en="Interactive car showroom with test drives, multiple payment systems, and comprehensive catalog. Features 200+ different vehicles from economy to luxury and sports cars. Includes financing system and car loans with installment payments.">معرض سيارات تفاعلي مع إمكانية تجربة السيارات وأنظمة دفع متعددة وكتالوج شامل. يضم أكثر من 200 سيارة مختلفة من السيارات الاقتصادية إلى السيارات الفاخرة والرياضية. يتضمن نظام تمويل وقروض سيارات مع إمكانية الدفع بالتقسيط.</p>
-                            <a href="#car-dealership-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('car-dealership')">تحميل مجاني</a>
-                        </div>
-                    </div>
-
-                    <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=200&fit=crop&crop=center" alt="نظام العقارات" class="script-image">
-                        <div class="script-content">
-                            <h3 data-ar="نظام العقارات الذكي" data-en="Smart Real Estate System">نظام العقارات الذكي</h3>
-                            <div class="script-meta">
-                                <span data-ar="الفئة: عقارات" data-en="Category: Real Estate">الفئة: عقارات</span>
-                                <span data-ar="التحديث: منذ أسبوع" data-en="Updated: 1 week ago">التحديث: منذ أسبوع</span>
-                            </div>
-                            <p data-ar="نظام عقارات متطور يدعم بيع وشراء المنازل والشقق مع نظام مفاتيح ذكي وإدارة متقدمة. يشمل أكثر من 150 عقار قابل للشراء، نظام إيجار شهري، وإمكانية تخصيص المنازل بالأثاث والديكور. يدعم العقارات التجارية والسكنية مع أسعار واقعية ومتغيرة حسب الموقع." data-en="Advanced real estate system supporting buying/selling houses and apartments with smart key system and advanced management. Includes 150+ purchasable properties, monthly rental system, and home customization with furniture. Supports commercial and residential properties with realistic location-based pricing.">نظام عقارات متطور يدعم بيع وشراء المنازل والشقق مع نظام مفاتيح ذكي وإدارة متقدمة. يشمل أكثر من 150 عقار قابل للشراء، نظام إيجار شهري، وإمكانية تخصيص المنازل بالأثاث والديكور. يدعم العقارات التجارية والسكنية مع أسعار واقعية ومتغيرة حسب الموقع.</p>
-                            <a href="#real-estate-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('real-estate')">تحميل مجاني</a>
-                        </div>
-                    </div>
-
-                    <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=200&fit=crop&crop=center" alt="سكربت الشرطة" class="script-image">
-                        <div class="script-content">
-                            <h3 data-ar="سكربت الشرطة المتقدم" data-en="Advanced Police Script">سكربت الشرطة المتقدم</h3>
-                            <div class="script-meta">
-                                <span data-ar="الفئة: الشرطة" data-en="Category: Police">الفئة: الشرطة</span>
-                                <span data-ar="التحديث: منذ 5 أيام" data-en="Updated: 5 days ago">التحديث: منذ 5 أيام</span>
-                            </div>
-                            <p data-ar="نظام شرطة شامل مع MDT متطور، نظام استدعاءات، إدارة الجرائم، وأدوات التحقيق. يتضمن قاعدة بيانات المجرمين، نظام البحث والتحري، إصدار المخالفات والأوامر القضائية. يدعم التحقيقات المعقدة مع نظام أدلة متقدم وتسجيل الاستجوابات." data-en="Comprehensive police system with advanced MDT, dispatch system, crime management, and investigation tools. Includes criminal database, search and investigation system, issuing tickets and warrants. Supports complex investigations with advanced evidence system and interrogation recording.">نظام شرطة شامل مع MDT متطور، نظام استدعاءات، إدارة الجرائم، وأدوات التحقيق. يتضمن قاعدة بيانات المجرمين، نظام البحث والتحري، إصدار المخالفات والأوامر القضائية. يدعم التحقيقات المعقدة مع نظام أدلة متقدم وتسجيل الاستجوابات.</p>
-                            <a href="#police-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('police')">تحميل مجاني</a>
-                        </div>
-                    </div>
-
-                    <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=400&h=200&fit=crop&crop=center" alt="نظام المخدرات" class="script-image">
-                        <div class="script-content">
-                            <h3 data-ar="نظام المخدرات الواقعي" data-en="Realistic Drug System">نظام المخدرات الواقعي</h3>
-                            <div class="script-meta">
-                                <span data-ar="الفئة: إجرام" data-en="Category: Crime">الفئة: إجرام</span>
-                                <span data-ar="التحديث: منذ يومين" data-en="Updated: 2 days ago">التحديث: منذ يومين</span>
-                            </div>
-                            <p data-ar="نظام مخدرات واقعي مع زراعة وتصنيع وتوزيع، مع أنظمة أمان متقدمة ومخاطر واقعية. يشمل 8 أنواع مختلفة من المخدرات، مختبرات سرية، شبكات توزيع معقدة، ونظام غسيل أموال. يتضمن مخاطر الاعتقال والمداهمات الشرطية مع عواقب واقعية." data-en="Realistic drug system with cultivation, manufacturing, and distribution, with advanced security systems and realistic risks. Features 8 different drug types, secret labs, complex distribution networks, and money laundering system. Includes arrest risks and police raids with realistic consequences.">نظام مخدرات واقعي مع زراعة وتصنيع وتوزيع، مع أنظمة أمان متقدمة ومخاطر واقعية. يشمل 8 أنواع مختلفة من المخدرات، مختبرات سرية، شبكات توزيع معقدة، ونظام غسيل أموال. يتضمن مخاطر الاعتقال والمداهمات الشرطية مع عواقب واقعية.</p>
-                            <a href="#drug-system-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('drug-system')">تحميل مجاني</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
-                    <ul>
-                        <li><a href="#" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                        <li><a href="#" data-ar="السكربتات" data-en="Scripts">السكربتات</a></li>
-                        <li><a href="#" data-ar="التعليمات" data-en="Tutorials">التعليمات</a></li>
-                        <li><a href="#" data-ar="الدعم" data-en="Support">الدعم</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3 data-ar="الفئات" data-en="Categories">الفئات</h3>
-                    <ul>
-                        <li><a href="#" data-ar="سكربتات الوظائف" data-en="Job Scripts">سكربتات الوظائف</a></li>
-                        <li><a href="#" data-ar="سكربتات الاقتصاد" data-en="Economy Scripts">سكربتات الاقتصاد</a></li>
-                        <li><a href="#" data-ar="سكربتات الشرطة" data-en="Police Scripts">سكربتات الشرطة</a></li>
-                        <li><a href="#" data-ar="سكربتات العقارات" data-en="Real Estate Scripts">سكربتات العقارات</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h3>
-                    <p data-ar="للدعم والاستفسارات" data-en="For support and inquiries">للدعم والاستفسارات</p>
-                    <p data-ar="البريد: support@fivemscripts.com" data-en="Email: support@fivemscripts.com">البريد: support@fivemscripts.com</p>
-                    <p data-ar="ديسكورد: FiveM Scripts" data-en="Discord: FiveM Scripts">ديسكورد: FiveM Scripts</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p data-ar="© 2025 سكربتات FiveM مجاناً. جميع الحقوق محفوظة." data-en="© 2025 Free FiveM Scripts. All rights reserved.">© 2025 سكربتات FiveM مجاناً. جميع الحقوق محفوظة.</p>
-            </div>
+    <div class="container">
+        <div class="header">
+            <h1>مرحباً بك في نظامنا</h1>
+            <p>سجل الدخول أو أنشئ حساباً للبدء</p>
         </div>
-    </footer>
+        
+        <!-- صفحة تسجيل الدخول -->
+        <div class="form-page" id="login-page">
+            <h2 class="form-title">تسجيل الدخول</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="login-email">البريد الإلكتروني</label>
+                    <input type="email" id="login-email" required placeholder="أدخل بريدك الإلكتروني">
+                </div>
+                
+                <div class="input-group">
+                    <label for="login-password">كلمة المرور</label>
+                    <input type="password" id="login-password" required placeholder="أدخل كلمة المرور">
+                </div>
+                
+                <button type="submit" class="btn">
+                    <i class="material-icons">login</i>
+                    تسجيل الدخول
+                </button>
+                
+                <div class="social-login">
+                    <div class="social-login-title">أو سجل الدخول باستخدام</div>
+                    
+                    <button type="button" class="btn btn-google" id="google-login">
+                        <i class="fab fa-google"></i>
+                        تسجيل الدخول عبر Google
+                    </button>
+                    
+                    <button type="button" class="btn btn-discord" id="discord-login">
+                        <i class="fab fa-discord"></i>
+                        تسجيل الدخول عبر Discord
+                    </button>
+                </div>
+                
+                <div class="toggle-form">
+                    ليس لديك حساب؟ <a id="show-signup">إنشاء حساب</a>
+                </div>
+            </form>
+            
+            <div id="login-message"></div>
+        </div>
+        
+        <!-- صفحة إنشاء حساب -->
+        <div class="form-page" id="signup-page" style="display: none;">
+            <h2 class="form-title">إنشاء حساب جديد</h2>
+            <form id="signup-form">
+                <div class="input-group">
+                    <label for="signup-name">الاسم الكامل</label>
+                    <input type="text" id="signup-name" required placeholder="أدخل اسمك الكامل">
+                </div>
+                
+                <div class="input-group">
+                    <label for="signup-email">البريد الإلكتروني</label>
+                    <input type="email" id="signup-email" required placeholder="أدخل بريدك الإلكتروني">
+                </div>
+                
+                <div class="input-group">
+                    <label for="signup-password">كلمة المرور</label>
+                    <input type="password" id="signup-password" required placeholder="أنشئ كلمة مرور قوية">
+                </div>
+                
+                <div class="input-group">
+                    <label for="signup-confirm">تأكيد كلمة المرور</label>
+                    <input type="password" id="signup-confirm" required placeholder="أعد إدخال كلمة المرور">
+                </div>
+                
+                <button type="submit" class="btn">
+                    <i class="material-icons">person_add</i>
+                    إنشاء حساب
+                </button>
+                
+                <div class="social-login">
+                    <div class="social-login-title">أو سجل باستخدام</div>
+                    
+                    <button type="button" class="btn btn-google" id="google-signup">
+                        <i class="fab fa-google"></i>
+                        التسجيل عبر Google
+                    </button>
+                    
+                    <button type="button" class="btn btn-discord" id="discord-signup">
+                        <i class="fab fa-discord"></i>
+                        التسجيل عبر Discord
+                    </button>
+                </div>
+                
+                <div class="toggle-form">
+                    لديك حساب بالفعل؟ <a id="show-login">تسجيل الدخول</a>
+                </div>
+            </form>
+            
+            <div id="signup-message"></div>
+        </div>
+        
+        <!-- صفحة المستخدم -->
+        <div class="user-dashboard" id="user-dashboard">
+            <div class="user-avatar">
+                <i class="material-icons">person</i>
+            </div>
+            
+            <div class="user-info">
+                <h2 id="user-name">محمد أحمد</h2>
+                <p id="user-email">mohamed@example.com</p>
+                <p id="user-method">تم التسجيل باستخدام: البريد الإلكتروني</p>
+            </div>
+            
+            <button class="btn logout-btn" id="logout-btn">
+                <i class="material-icons">logout</i>
+                تسجيل الخروج
+            </button>
+        </div>
+    </div>
 
     <script>
-        let currentLang = 'ar';
+        // عناصر الصفحة
+        const loginPage = document.getElementById('login-page');
+        const signupPage = document.getElementById('signup-page');
+        const userDashboard = document.getElementById('user-dashboard');
+        const showSignup = document.getElementById('show-signup');
+        const showLogin = document.getElementById('show-login');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const loginMessage = document.getElementById('login-message');
+        const signupMessage = document.getElementById('signup-message');
+        const googleLogin = document.getElementById('google-login');
+        const discordLogin = document.getElementById('discord-login');
+        const googleSignup = document.getElementById('google-signup');
+        const discordSignup = document.getElementById('discord-signup');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userName = document.getElementById('user-name');
+        const userEmail = document.getElementById('user-email');
+        const userMethod = document.getElementById('user-method');
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+        // تبديل النماذج
+        showSignup.addEventListener('click', () => {
+            loginPage.style.display = 'none';
+            signupPage.style.display = 'block';
+            clearMessages();
+        });
+
+        showLogin.addEventListener('click', () => {
+            signupPage.style.display = 'none';
+            loginPage.style.display = 'block';
+            clearMessages();
+        });
+
+        // تسجيل الدخول بالبريد وكلمة المرور
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
             
-            // Update document direction and language
-            document.documentElement.lang = currentLang;
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            
-            // Update all elements with language data
-            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
-                const newText = element.getAttribute(`data-${currentLang}`);
-                if (newText) {
-                    element.textContent = newText;
-                }
-            });
-            
-            // Update navigation alignment
-            const nav = document.querySelector('nav');
-            const navLinks = document.querySelector('.nav-links');
-            if (currentLang === 'en') {
-                nav.style.flexDirection = 'row';
-                navLinks.style.order = '2';
-            } else {
-                nav.style.flexDirection = 'row';
-                navLinks.style.order = '2';
+            // التحقق من صحة المدخلات
+            if (!email || !password) {
+                showMessage(loginMessage, 'الرجاء ملء جميع الحقول', 'error');
+                return;
             }
             
-            // Smooth transition effect
-            document.body.style.transition = 'all 0.3s ease';
+            // محاكاة تسجيل الدخول
+            simulateLogin({
+                name: email.split('@')[0],
+                email: email,
+                method: 'البريد الإلكتروني'
+            });
+        });
+
+        // إنشاء حساب بالبريد وكلمة المرور
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm').value;
+            
+            // التحقق من صحة المدخلات
+            if (!name || !email || !password || !confirmPassword) {
+                showMessage(signupMessage, 'الرجاء ملء جميع الحقول', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showMessage(signupMessage, 'كلمتا المرور غير متطابقتين', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showMessage(signupMessage, 'كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'error');
+                return;
+            }
+            
+            // محاكاة إنشاء حساب
+            simulateSignup({
+                name: name,
+                email: email,
+                method: 'البريد الإلكتروني'
+            });
+        });
+
+        // تسجيل الدخول عبر Google
+        const loginWithGoogle = () => {
+            showMessage(loginMessage, 'جاري تسجيل الدخول باستخدام Google...', 'success');
+            
+            // محاكاة تسجيل الدخول عبر Google
             setTimeout(() => {
-                document.body.style.transition = '';
-            }, 300);
-        }
+                simulateLogin({
+                    name: 'مستخدم Google',
+                    email: 'google-user@example.com',
+                    method: 'Google'
+                });
+            }, 1500);
+        };
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        googleLogin.addEventListener('click', loginWithGoogle);
+        googleSignup.addEventListener('click', loginWithGoogle);
+
+        // تسجيل الدخول عبر Discord
+        const loginWithDiscord = () => {
+            showMessage(loginMessage, 'جاري تسجيل الدخول باستخدام Discord...', 'success');
+            
+            // محاكاة تسجيل الدخول عبر Discord
+            setTimeout(() => {
+                simulateLogin({
+                    name: 'مستخدم Discord',
+                    email: 'discord-user@example.com',
+                    method: 'Discord'
+                });
+            }, 1500);
+        };
+
+        discordLogin.addEventListener('click', loginWithDiscord);
+        discordSignup.addEventListener('click', loginWithDiscord);
+
+        // تسجيل الخروج
+        logoutBtn.addEventListener('click', () => {
+            loginPage.style.display = 'block';
+            signupPage.style.display = 'none';
+            userDashboard.style.display = 'none';
+            
+            // إعادة تعيين حقول النماذج
+            loginForm.reset();
+            signupForm.reset();
+            
+            showMessage(loginMessage, 'تم تسجيل الخروج بنجاح', 'success');
+            setTimeout(() => {
+                loginMessage.style.display = 'none';
+            }, 3000);
         });
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(26, 27, 46, 0.98)';
-            } else {
-                header.style.background = 'rgba(26, 27, 46, 0.95)';
-            }
-        });
-
-        // Animation on scroll
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.script-card');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
+        // محاكاة تسجيل الدخول الناجح
+        function simulateLogin(user) {
+            showMessage(loginMessage, `مرحباً بعودتك، ${user.name}`, 'success');
+            
+            setTimeout(() => {
+                // عرض لوحة المستخدم
+                loginPage.style.display = 'none';
+                signupPage.style.display = 'none';
+                userDashboard.style.display = 'block';
                 
-                if (elementTop < windowHeight - 100) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
+                // تحديث معلومات المستخدم
+                userName.textContent = user.name;
+                userEmail.textContent = user.email;
+                userMethod.textContent = `تم التسجيل باستخدام: ${user.method}`;
+                
+                // إعادة تعيين حقول النماذج
+                loginForm.reset();
+                signupForm.reset();
+            }, 2000);
         }
 
-        // Initialize animations
-        document.querySelectorAll('.script-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.6s ease';
-        });
+        // محاكاة إنشاء حساب ناجح
+        function simulateSignup(user) {
+            showMessage(signupMessage, `تم إنشاء حسابك بنجاح، ${user.name}`, 'success');
+            
+            setTimeout(() => {
+                // عرض لوحة المستخدم
+                loginPage.style.display = 'none';
+                signupPage.style.display = 'none';
+                userDashboard.style.display = 'block';
+                
+                // تحديث معلومات المستخدم
+                userName.textContent = user.name;
+                userEmail.textContent = user.email;
+                userMethod.textContent = `تم التسجيل باستخدام: ${user.method}`;
+                
+                // إعادة تعيين حقول النماذج
+                signupForm.reset();
+            }, 2000);
+        }
 
-        window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll(); // Run once on load
+        // عرض الرسائل
+        function showMessage(element, message, type) {
+            element.textContent = message;
+            element.className = type + '-message';
+            element.style.display = 'block';
+            
+            // إخفاء الرسالة بعد 5 ثواني
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        // مسح جميع الرسائل
+        function clearMessages() {
+            loginMessage.style.display = 'none';
+            signupMessage.style.display = 'none';
+        }
     </script>
 </body>
 </html>
